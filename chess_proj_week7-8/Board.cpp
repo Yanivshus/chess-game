@@ -68,6 +68,21 @@ void Board::setBoard(const std::string& board)
 	}
 }
 
+Piece* Board::getPiece(Point src) const
+{
+	for (int i = 0; i < ROWS; i++)
+	{
+		for (int j = 0; j < ROWS; j++)
+		{
+			if (src.getX() == this->_board[i][j]->getPieceLoc().getX()
+				&& src.getY() == this->_board[i][j]->getPieceLoc().getY()) 
+			{
+				return this->_board[i][j];
+			}
+		}
+	}
+}
+
 Point Board::destructLocation(const std::string& loc) const
 {
 	return Point();

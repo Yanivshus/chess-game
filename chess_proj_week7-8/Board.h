@@ -22,14 +22,15 @@
 #define NULL_PIECE '#'
 
 class Board {
-private:
-	Piece* _board[ROWS][COLS];
-	Point _kingWhiteLoc;
-	Point _kingBlackLoc;
-public:
-	Board(const std::string& board);
-	~Board();
+	private:
+		Piece* _board[ROWS][COLS];
+		Point _kingWhiteLoc;
+		Point _kingBlackLoc;
+		void setBoard(const std::string& board);
+	public:
+		Board(const std::string& board);
+		~Board();
 
-	void setBoard(const std::string& board);
-	Point destructLocation(const std::string& loc) const;
+		Piece* getPiece(Point src) const;
+		Point destructLocation(const std::string& loc) const;
 };
