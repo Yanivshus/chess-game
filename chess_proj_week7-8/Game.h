@@ -37,6 +37,6 @@ class Game {
 		std::string turn(const std::string& playerMove);
 		int checkIfTurnPossible(const Point& src, const Point& dst) const;
 		std::string getBoardAsString() const;
-		void switchLocations(const Point& src, const Point& dst);
+		void movePiece(const Point& src,const Point& dst);
 
 };

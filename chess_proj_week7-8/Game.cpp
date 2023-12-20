@@ -19,8 +19,8 @@ std::string Game::turn(const std::string& playerMove)
 		//turning each char of location to a number.
 		srcY = playerMove[0] - 'a';
 		srcX = playerMove[1] - '0';
-		dstX = playerMove[2] - 'a';
-		dstY = playerMove[3] - '0';
+		dstY = playerMove[2] - 'a';
+		dstX = playerMove[3] - '0';
 	}
 	//creating points for src and dst.
 	Point src(srcX, srcY);
@@ -28,10 +28,12 @@ std::string Game::turn(const std::string& playerMove)
 	//checking if there is somthing wrong with the points.
 	code = checkIfTurnPossible(src, dst);
 	//if nothing wrong we can proceed to move the player.
-	if (code == VALID_MOVE) {
+	if (code == VALID_MOVE)
+	{
 
 	}
-	else {
+	else
+	{//if somthing were wrong with the specific move we will return the code.
 		return std::to_string(code) + '\0';
 	}
 
@@ -83,3 +85,12 @@ std::string Game::getBoardAsString() const
 {
 	return STARTER_BOARD;
 }
+
+
+void Game::movePiece(const Point& src, const Point& dst)
+{
+
+}
+
+
+
