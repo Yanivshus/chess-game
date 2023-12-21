@@ -9,6 +9,8 @@
 #define WHITE_PLAYER '0'
 #define BLACK_PLAYER '1'
 
+#define OFFSET_Y 'a'
+#define OFFSET_X '0'
 
 #define VALID_MOVE 0
 #define VALID_MOVE_CHESS 1

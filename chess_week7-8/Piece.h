@@ -23,10 +23,10 @@ protected:
 public:
 	Piece(const Point& loc, const char color, const char type);
 	virtual ~Piece();
-	virtual int checkIfMoveValid(Board*** board) const = 0;
+	virtual int checkIfMoveValid(Board*** board, const Point& dst) const = 0;
 	//virtual int move(const std::string& srcToDst) = 0;
 	char getPieceType();
 	char getPieceColor();
 	Point getPieceLoc();
-	virtual bool checkIfChessKing(Board*** board) const = 0;
+	virtual bool checkIfChessKing(Board*** board, const Point& dest) const = 0;
 };

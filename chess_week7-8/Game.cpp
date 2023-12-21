@@ -17,10 +17,10 @@ std::string Game::turn(const std::string& playerMove)
 	//checking if the move size is valid like e2e4.
 	if (playerMove.size() == SIZE_OF_MOVE) {
 		//turning each char of location to a number.
-		srcY = playerMove[0] - 'a';
-		srcX = playerMove[1] - '0';
-		dstY = playerMove[2] - 'a';
-		dstX = playerMove[3] - '0';
+		srcY = playerMove[0] - OFFSET_Y;
+		srcX = playerMove[1] - OFFSET_X;
+		dstY = playerMove[2] - OFFSET_Y;
+		dstX = playerMove[3] - OFFSET_X;
 	}
 	//creating points for src and dst.
 	Point src(srcX, srcY);
