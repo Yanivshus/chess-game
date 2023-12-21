@@ -63,18 +63,26 @@ int Game::checkIfTurnPossible(const Point& src, const Point& dst) const
 		return INVALID_MOVE_OUT_OF_INDEX;
 	}
 	else {
-		//checking if the src piece is the same color as in the board.
-		if (this->_board->getPiece(src)->getPieceColor() != this->_currPlayer)
+		//checking if the src and dst are the same.
+		if (src.getX() == dst.getX() && src.getY() == dst.getX()) 
 		{
-			return INVALID_MOVE_NO_TOOL_SRC;
+			return INVALID_MOVE_SAME_SRC_DST;
 		}
 		else {
-			//checking if there is current piece in the dst point on the board.
-			if (this->_board->getPiece(dst)->getPieceColor() == this->_currPlayer) {
-				return INVALID_MOVE_TOOL_AT_DST;
+			//checking if the src piece is the same color as in the board.
+			if (this->_board->getPiece(src)->getPieceColor() != this->_currPlayer)
+			{
+				return INVALID_MOVE_NO_TOOL_SRC;
 			}
 			else {
-				return VALID_MOVE;
+				//checking if there is current piece in the dst point on the board.
+				if (this->_board->getPiece(dst)->getPieceColor() == this->_currPlayer) 
+				{
+					return INVALID_MOVE_TOOL_AT_DST;
+				}
+				else {
+					return VALID_MOVE;
+				}
 			}
 		}
 	}
