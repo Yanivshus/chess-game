@@ -13,6 +13,8 @@
 
 #define ROW_SPOT 0
 
+class Board;
+
 class Piece {
 protected:
 	Point _loc;
