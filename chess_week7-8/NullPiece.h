@@ -2,10 +2,6 @@
 #include "Piece.h"
 
 class NullPiece : public Piece {
-	
-	
-
-
 public:
 	NullPiece(const Point& loc, const char color, const char type);
 	~NullPiece();

@@ -15,7 +15,7 @@ Board::Board(const std::string& board)
 	this->_board = new Piece**[ROWS];
 	for (int k = 0; k < ROWS; k++)
 	{
-		_board[k] = new Piece*[ROWS]; //intalizing the array
+		_board[k] = new Piece*[COLS]; //intalizing the array
 	}
 
 	for (int q = 0; q < ROWS; q++)
