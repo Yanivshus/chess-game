@@ -21,6 +21,8 @@
 
 #define NULL_PIECE '#'
 
+#define COLOR_OF_NULL_PIECE '\0'
+
 class Board {
 	private:
 		Piece* _board[ROWS][COLS];
