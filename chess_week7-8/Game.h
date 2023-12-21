@@ -12,6 +12,8 @@
 #define OFFSET_Y 'a'
 #define OFFSET_X '0'
 
+#define TYPE_NULL '#'
+
 #define VALID_MOVE 0
 #define VALID_MOVE_CHESS 1
 #define INVALID_MOVE_NO_TOOL_SRC 2
