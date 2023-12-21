@@ -30,7 +30,8 @@ std::string Game::turn(const std::string& playerMove)
 	//if nothing wrong we can proceed to move the player.
 	if (code == VALID_MOVE)
 	{
-
+		Piece* srcPiece = this->_board->getPiece(src);
+		code = srcPiece->checkIfMoveValid(this->_board, dst);
 	}
 	else
 	{//if somthing were wrong with the specific move we will return the code.

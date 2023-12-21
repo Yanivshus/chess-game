@@ -8,12 +8,13 @@ Rook::~Rook()
 {
 }
 
-int Rook::checkIfMoveValid(Board*** board) const
+int Rook::checkIfMoveValid(Board* board, const Point& dst) const
 {
 	return 0;
 }
 
-bool Rook::checkIfChessKing(Board*** board) const
+bool Rook::checkIfChessKing(Board* board, const Point& dst) const
 {
 	return false;
 }
+
