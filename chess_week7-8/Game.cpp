@@ -51,20 +51,19 @@ std::string Game::turn(const std::string& playerMove)
 	else {
 		return std::to_string(code) + '\0';
 	}
-
 }
 
 int Game::checkIfTurnPossible(const Point& src, const Point& dst) const
 {
 	//checking if y and x of the src and dst are between 0-7.
 	if (src.getX() >= ROWS || src.getY() >= ROWS || dst.getX() >= ROWS || dst.getY() >= ROWS
-		|| src.getX() < START_ARR || src.getY() < START_ARR || dst.getX() < START_ARR || dst.getY() < START_ARR) 
+		|| src.getX() < START_ARR || src.getY() < START_ARR || dst.getX() < START_ARR || dst.getY() < START_ARR)
 	{
 		return INVALID_MOVE_OUT_OF_INDEX;
 	}
 	else {
 		//checking if the src piece is the same color as in the board.
-		if (this->_board->getPiece(src)->getPieceColor() != this->_currPlayer) 
+		if (this->_board->getPiece(src)->getPieceColor() != this->_currPlayer)
 		{
 			return INVALID_MOVE_NO_TOOL_SRC;
 		}
@@ -78,19 +77,9 @@ int Game::checkIfTurnPossible(const Point& src, const Point& dst) const
 			}
 		}
 	}
-	return VALID_MOVE;
 }
 
 std::string Game::getBoardAsString() const
 {
 	return STARTER_BOARD;
 }
-
-
-void Game::movePiece(const Point& src, const Point& dst)
-{
-
-}
-
-
-

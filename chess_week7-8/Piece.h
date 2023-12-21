@@ -1,6 +1,6 @@
 #pragma once
+#include "Board.h"
 #include "Point.h"
-#include <iostream>
 
 #define VALID_MOVE 0
 #define VALID_MOVE_CHESS 1

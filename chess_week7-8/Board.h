@@ -1,7 +1,7 @@
 #pragma once
-#include <iostream>
-#include "Point.h"
 #include "Piece.h"
+#include <iostream>
+
 #define ROWS 8
 #define COLS 8
 
@@ -24,15 +24,15 @@
 #define COLOR_OF_NULL_PIECE '\0'
 
 class Board {
-	private:
-		Piece* _board[ROWS][COLS];
-		Point _kingWhiteLoc;
-		Point _kingBlackLoc;
-		void setBoard(const std::string& board);
-	public:
-		Board(const std::string& board);
-		~Board();
+private:
+	Piece*** _board;
+	Point _kingWhiteLoc;
+	Point _kingBlackLoc;
+public:
+	Board(const std::string& board);
+	~Board();
 
-		Piece* getPiece(Point src) const;
-		Point destructLocation(const std::string& loc) const;
+	Piece*** getBoard() const;
+	Piece* getPiece(Point src) const;
+
 };

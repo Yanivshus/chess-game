@@ -2,23 +2,6 @@
 
 Board::Board(const std::string& board)
 {
-	setBoard(board);
-}
-
-Board::~Board()
-{
-	//deleting all allocated pieces.
-	for (int i = 0; i < ROWS; i++)
-	{
-		for (int j = 0; j < COLS; j++) 
-		{
-			delete this->_board[i][j];
-		}
-	}
-}
-
-void Board::setBoard(const std::string& board)
-{
 	char boardAsString[ROWS][COLS] = { 0 };
 	//looping through the board as a long string and coverting it to 2d array. 
 	for (int i = 0; i < ROWS; i++)
@@ -28,13 +11,18 @@ void Board::setBoard(const std::string& board)
 			boardAsString[i][j] = board[i * COLS + j];
 		}
 	}
-	
-	//creating a piece for each spot;
+
+	this->_board = new Piece**[ROWS];
+	for (int k = 0; k < ROWS; k++)
+	{
+		_board[k] = new Piece*[ROWS]; //intalizing the array
+	}
+
 	for (int q = 0; q < ROWS; q++)
 	{
-		for (int k = 0; k < COLS; k++)
+		for (int m = 0; m < COLS; m++)
 		{
-			char currPiece = boardAsString[q][k];
+			char currPiece = boardAsString[q][m];
 			switch (currPiece)
 			{
 			case KING_BLACK:
@@ -68,6 +56,29 @@ void Board::setBoard(const std::string& board)
 	}
 }
 
+Board::~Board()
+{
+	for (int i = 0; i < ROWS; i++)
+	{
+		for (int j = 0; j < COLS; j++)
+		{
+			if (this->_board[i][j] != nullptr)
+			{
+				delete this->_board[i][j]; //deleting each ChessPiece
+			}
+		}
+
+		delete[] this->_board[i]; //deleting the entire row
+	}
+
+	delete[] this->_board; //deleting the entire board
+}
+
+Piece*** Board::getBoard() const
+{
+	return this->_board;
+}
+
 Piece* Board::getPiece(Point src) const
 {
 	for (int i = 0; i < ROWS; i++)
@@ -75,15 +86,12 @@ Piece* Board::getPiece(Point src) const
 		for (int j = 0; j < ROWS; j++)
 		{
 			if (src.getX() == this->_board[i][j]->getPieceLoc().getX()
-				&& src.getY() == this->_board[i][j]->getPieceLoc().getY()) 
+				&& src.getY() == this->_board[i][j]->getPieceLoc().getY())
 			{
 				return this->_board[i][j];
 			}
 		}
 	}
+	return nullptr;
 }
 
-Point Board::destructLocation(const std::string& loc) const
-{
-	return Point();
-}

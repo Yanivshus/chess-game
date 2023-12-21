@@ -25,18 +25,15 @@
 #define COLS 8
 #define START_ARR  0
 
-
 class Game {
-	private:
-		char _currPlayer;
-		Board* _board;
-	public:
-		Game();
-		~Game();
+private:
+	char _currPlayer;
+	Board* _board;
+public:
+	Game();
+	~Game();
 
-		std::string turn(const std::string& playerMove);
-		int checkIfTurnPossible(const Point& src, const Point& dst) const;
-		std::string getBoardAsString() const;
-		void movePiece(const Point& src,const Point& dst);
-
+	std::string turn(const std::string& playerMove);
+	int checkIfTurnPossible(const Point& src, const Point& dst) const;
+	std::string getBoardAsString() const;
 };
