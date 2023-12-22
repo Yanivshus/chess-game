@@ -32,9 +32,9 @@ std::string Game::turn(const std::string& playerMove)
 	{
 		Piece* srcPiece = this->_board->getPiece(src);
 		code = srcPiece->checkIfMoveValid(this->_board, dst);
-		if (code != VALID_MOVE) 
+		if (code == VALID_MOVE) 
 		{
-
+			movePiece(src, dst);
 		}
 	}
 	else
