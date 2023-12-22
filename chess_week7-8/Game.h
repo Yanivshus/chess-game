@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include "Board.h"
+#include "NullPiece.h"
 #include <string>
 
 #define STARTER_PLAYER 64
@@ -40,4 +41,5 @@ public:
 	std::string turn(const std::string& playerMove);
 	int checkIfTurnPossible(const Point& src, const Point& dst) const;
 	std::string getBoardAsString() const;
+	void movePiece(const Point& src, const Point& dst);
 };

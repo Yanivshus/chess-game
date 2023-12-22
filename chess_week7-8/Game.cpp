@@ -94,5 +94,45 @@ int Game::checkIfTurnPossible(const Point& src, const Point& dst) const
 
 std::string Game::getBoardAsString() const
 {
-	return STARTER_BOARD;
+	std::string boardString = "";
+	for (int i = 0; i < ROWS; i++)
+	{
+		for (int j = 0; j < COLS; j++)
+		{
+			boardString += this->_board->getPiece(Point(i, j))->getPieceType();
+		}
+	}
+	return boardString;
+}
+
+void Game::movePiece(const Point& src, const Point& dst)
+{
+	Piece* pieceToMove = this->_board->getPiece(src);
+	Piece* pieceInTheDest = this->_board->getPiece(dst);
+	Piece*** board = this->_board->getBoard();
+
+	//the loop will find the piece we want to move,
+	//puts a null piece instead of it because we moved it
+	//and then finds dst and deletes the piece in the dest and place the source piece there.
+
+	for (int i = 0; i < ROWS; i++)
+	{
+		for (int j = 0; j < COLS; j++)
+		{
+			//check for source
+			if(board[i][j]->getPieceLoc().getX() == src.getX() &&
+				board[i][j]->getPieceLoc().getY() == src.getY())
+			{
+				board[i][j] = new NullPiece(Point(i, j), TYPE_NULL, TYPE_NULL);
+
+			}
+			//check for dst
+			if (board[i][j]->getPieceLoc().getX() == dst.getX() &&
+				board[i][j]->getPieceLoc().getY() == dst.getY())
+			{
+				delete board[i][j];
+				board[i][j] = pieceToMove;
+			}
+		}
+	}
 }
