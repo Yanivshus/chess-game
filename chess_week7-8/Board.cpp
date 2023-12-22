@@ -28,6 +28,7 @@ Board::Board(const std::string& board)
 			case KING_BLACK:
 				break;
 			case ROOK_BLACK:
+
 				break;
 			case PAWN_BLACK:
 				break;
@@ -50,6 +51,7 @@ Board::Board(const std::string& board)
 			case QUEEN_WHITE:
 				break;
 			case NULL_PIECE:
+				this->_board[q][m] = new NullPiece(Point(q,m), NULL_PIECE, NULL_PIECE);
 				break;
 			}
 		}

@@ -11,7 +11,6 @@ Rook::~Rook()
 int Rook::checkIfMoveValid(Board* board, const Point& dst) const
 {
     int i = 0;
-    int currX = 0;
     // Collision detection
     if (this->_loc.getX() == dst.getX()) {
         // Horizontal move

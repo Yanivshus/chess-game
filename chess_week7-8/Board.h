@@ -1,6 +1,7 @@
 #pragma once
 #include "Piece.h"
 #include "Point.h"
+//#include "NullPiece.h"
 #include <iostream>
 
 #define ROWS 8
@@ -25,6 +26,7 @@
 #define COLOR_OF_NULL_PIECE '\0'
 
 class Piece;
+//class NullPiece;
 
 class Board {
 private:

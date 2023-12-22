@@ -24,7 +24,7 @@ public:
 	Piece(const Point& loc, const char color, const char type);
 	virtual ~Piece();
 	virtual int checkIfMoveValid(Board* board, const Point& dst) const = 0;
-	//virtual int move(const std::string& srcToDst) = 0;
+
 	char getPieceType();
 	char getPieceColor();
 	Point getPieceLoc();
