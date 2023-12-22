@@ -1,7 +1,6 @@
 #pragma once
 #include "Piece.h"
 #include "Point.h"
-//#include "NullPiece.h"
 #include <iostream>
 
 #define ROWS 8
@@ -22,20 +21,22 @@
 #define QUEEN_WHITE 'q'
 
 #define NULL_PIECE '#'
+#define WHITE_PLAYER_BOARD '0'
 
 #define COLOR_OF_NULL_PIECE '\0'
 
 class Piece;
-//class NullPiece;
+class NullPiece;
 
 class Board {
 private:
 	Piece*** _board;
-	Point _kingWhiteLoc;
-	Point _kingBlackLoc;
 public:
 	Board(const std::string& board);
 	~Board();
+
+	Point getKingWhiteLoc() const;
+	Point getKingBlackLoc() const;
 
 	Piece*** getBoard() const;
 	Piece* getPiece(Point src) const;

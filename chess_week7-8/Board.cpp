@@ -1,4 +1,5 @@
 #include "Board.h"
+#include "NullPiece.h"
 
 Board::Board(const std::string& board)
 {
@@ -74,6 +75,38 @@ Board::~Board()
 	}
 
 	delete[] this->_board; //deleting the entire board
+}
+
+Point Board::getKingWhiteLoc() const
+{
+	//looping on the board and looking for white king.
+	for (int i = 0; i < ROWS; i++)
+	{
+		for (int j = 0; j < COLS; j++)
+		{
+			if (this->_board[i][j]->getPieceColor() == WHITE_PLAYER_BOARD &&
+				this->_board[i][j]->getPieceType() == KING_WHITE)
+			{
+				return this->_board[i][j]->getPieceLoc();
+			}
+		}
+	}
+}
+
+Point Board::getKingBlackLoc() const
+{
+	//looping on the board to search for black king.
+	for (int i = 0; i < ROWS; i++)
+	{
+		for (int j = 0; j < COLS; j++)
+		{
+			if (this->_board[i][j]->getPieceColor() != WHITE_PLAYER_BOARD &&
+				this->_board[i][j]->getPieceType() == KING_BLACK)
+			{
+				return this->_board[i][j]->getPieceLoc();
+			}
+		}
+	}
 }
 
 Piece*** Board::getBoard() const
