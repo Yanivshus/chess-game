@@ -37,6 +37,16 @@ std::string Game::turn(const std::string& playerMove)
 		if (code == VALID_MOVE) 
 		{
 			movePiece(src, dst);
+			Piece* newPlacePiece = this->_board->getPiece(dst);
+			//checking if the piece after i moved it and checked if it moved right , made chess on the op king.
+			if (checkForChessOnOp(this->_board, newPlacePiece) == VALID_MOVE_CHESS)
+			{
+				code = VALID_MOVE_CHESS;//if yes the code will be chess.
+			}
+			else 
+			{
+				code = VALID_MOVE;//if note the code will remain valid move.
+			}
 		}
 		//if the move caused a chess on the currPlayer king we will undo the move and sent error code for chess out king
 		if (checkForOwnPieceChess(this->_board) == INVALID_MOVE_CHESS_ON_CURRENT)
@@ -44,6 +54,7 @@ std::string Game::turn(const std::string& playerMove)
 			code = INVALID_MOVE_CHESS_ON_CURRENT;
 			undoMove(dst, src);
 		}
+		
 	}
 	else
 	{//if somthing were wrong with the specific move we will return the code.
@@ -240,6 +251,33 @@ int Game::checkForOwnPieceChess(Board* board) const
 		}
 	}
 	return VALID_MOVE;
+}
+
+int Game::checkForChessOnOp(Board* board, Piece* toCheck)
+{
+	// if the current player playing is white we will check if he is treatening the black king.
+	if (this->_currPlayer == WHITE_PLAYER) {
+		Point kingBlack = board->getKingBlackLoc();
+		if (toCheck->checkIfMoveValid(board, kingBlack) == VALID_MOVE)
+		{
+			return VALID_MOVE_CHESS;
+		}
+		else {
+			return VALID_MOVE;
+		}
+	}
+	else // if the current player playing is black we will check if he is treatening the white king.
+	{
+		Point kingWhite = board->getKingWhiteLoc();
+		if (toCheck->checkIfMoveValid(board, kingWhite) == VALID_MOVE)
+		{
+			return VALID_MOVE_CHESS;
+		}
+		else{
+			return VALID_MOVE;
+		}
+	}
+	
 }
 
 
