@@ -46,7 +46,9 @@ int Rook::checkIfMoveValid(Board* board, const Point& dst) const
         // Not a valid rook move (neither horizontal nor vertical)
         return INVALID_MOVE_TOOL_MOVE_NOT_RIGHT;
     }
-
+    if (checkIfChessKing(board, dst) == true) {
+        return VALID_MOVE_CHESS;
+    }
     return VALID_MOVE;
 }
 
