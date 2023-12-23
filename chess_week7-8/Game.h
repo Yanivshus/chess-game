@@ -44,6 +44,6 @@ public:
 	std::string getBoardAsString() const;
 	void movePiece(const Point& src, const Point& dst);
 	void undoMove(const Point& src, const Point& dst);
-	int checkForOwnPiece(Board* board) const;
+	int checkForOwnPieceChess(Board* board) const;
 	
 };

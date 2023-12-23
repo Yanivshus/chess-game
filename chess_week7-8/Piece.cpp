@@ -23,6 +23,11 @@ char Piece::getPieceColor()
 	return this->_color;
 }
 
+void Piece::setLoc(const Point& other)
+{
+	this->_loc = other;
+}
+
 Point Piece::getPieceLoc()
 {
 	return this->_loc;

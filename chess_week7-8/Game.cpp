@@ -38,6 +38,12 @@ std::string Game::turn(const std::string& playerMove)
 		{
 			movePiece(src, dst);
 		}
+		//if the move caused a chess on the currPlayer king we will undo the move and sent error code for chess out king
+		if (checkForOwnPieceChess(this->_board) == INVALID_MOVE_CHESS_ON_CURRENT)
+		{
+			code = INVALID_MOVE_CHESS_ON_CURRENT;
+			undoMove(dst, src);
+		}
 	}
 	else
 	{//if somthing were wrong with the specific move we will return the code.
@@ -193,7 +199,7 @@ void Game::undoMove(const Point& src, const Point& dst)
 
 }
 
-int Game::checkForOwnPiece(Board* board) const
+int Game::checkForOwnPieceChess(Board* board) const
 {
 	Piece*** gameBoard = this->_board->getBoard();
 
@@ -233,6 +239,7 @@ int Game::checkForOwnPiece(Board* board) const
 			}
 		}
 	}
+	return VALID_MOVE;
 }
 
 
