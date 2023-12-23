@@ -1,6 +1,4 @@
 #pragma once
-#ifndef PIECE_H
-#define PIECE_H
 #include "Board.h"
 #include "Point.h"
 
@@ -29,8 +27,7 @@ public:
 	virtual bool checkIfChessKing(Board* board, const Point& dest) const = 0;
 	char getPieceType();
 	char getPieceColor();
+	void setLoc(const Point& other);
 	Point getPieceLoc();
 	
 };
-
-#endif

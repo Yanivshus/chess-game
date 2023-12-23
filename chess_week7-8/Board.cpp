@@ -1,5 +1,7 @@
 #include "Board.h"
 #include "NullPiece.h"
+#include "King.h"
+#include "Rook.h"
 
 Board::Board(const std::string& board)
 {

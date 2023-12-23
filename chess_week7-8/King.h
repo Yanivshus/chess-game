@@ -1,10 +1,11 @@
 #pragma once
 #include "Piece.h"
 
-class NullPiece : public Piece {
+class King : public Piece {
 public:
-	NullPiece(const Point& loc, const char color, const char type);
-	~NullPiece();
+
+	King(const Point& loc, const char color, const char type);
+	~King();
 
 	virtual int checkIfMoveValid(Board* board, const Point& dst) const override;
 	virtual bool checkIfChessKing(Board* board, const Point& dest) const override;

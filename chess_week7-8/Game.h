@@ -34,6 +34,7 @@ class Game {
 private:
 	char _currPlayer;
 	Board* _board;
+	Piece* _pieceBefore;
 public:
 	Game();
 	~Game();
@@ -42,4 +43,7 @@ public:
 	int checkIfTurnPossible(const Point& src, const Point& dst) const;
 	std::string getBoardAsString() const;
 	void movePiece(const Point& src, const Point& dst);
+	void undoMove(const Point& src, const Point& dst);
+	int checkForOwnPiece(Board* board) const;
+	
 };

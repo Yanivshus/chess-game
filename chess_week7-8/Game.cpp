@@ -1,4 +1,5 @@
 #include "Game.h"
+//#include "King.h"
 
 Game::Game()
 {
@@ -9,6 +10,7 @@ Game::Game()
 Game::~Game()
 {
 	delete this->_board;
+	delete this->_pieceBefore;
 }
 
 std::string Game::turn(const std::string& playerMove)
@@ -126,13 +128,111 @@ void Game::movePiece(const Point& src, const Point& dst)
 				board[i][j] = new NullPiece(Point(i, j), TYPE_NULL, TYPE_NULL);
 
 			}
+
+		}
+	}
+	for (int m = 0; m < ROWS; m++)
+	{
+		for (int q = 0; q < COLS; q++)
+		{
 			//check for dst
-			if (board[i][j]->getPieceLoc().getX() == dst.getX() &&
-				board[i][j]->getPieceLoc().getY() == dst.getY())
+			if (board[m][q]->getPieceLoc().getX() == dst.getX() &&
+				board[m][q]->getPieceLoc().getY() == dst.getY())
 			{
-				delete board[i][j];
-				board[i][j] = pieceToMove;
+				//checking if the piece from previous moves i saved was deleted if not we will delete it.
+				if (this->_pieceBefore != nullptr) {
+					delete this->_pieceBefore;
+				}
+				this->_pieceBefore = board[m][q];
+				board[m][q] = pieceToMove;
+				board[m][q]->setLoc(Point(m, q));
 			}
 		}
 	}
 }
+
+void Game::undoMove(const Point& src, const Point& dst)
+{
+	//not sure about this function.
+	Piece*** board = this->_board->getBoard();
+	Piece* toPlace = nullptr;
+
+	//in the first loop i will find the tool i want to undo his move
+	//then i will save the tool there i that place for later and put there the tool that was before.
+	for (int i = 0; i < ROWS; i++)
+	{
+		for (int j = 0; j < COLS; j++)
+		{
+			if (board[i][j]->getPieceLoc().getX() == src.getX() &&
+				board[i][j]->getPieceLoc().getY() == src.getY())
+			{
+				toPlace = board[i][j];
+				board[i][j] = this->_pieceBefore;
+			}
+
+		}
+	}
+	//in the second loop i will find the dst of the undo
+	//after i found it i will delete what was there before which is a nullPiece
+	//and place the tool i undoed his move back to his original place and sets his point back to original.
+	for (int m = 0; m < ROWS; m++)
+	{
+		for (int q = 0; q < COLS; q++)
+		{
+
+			if (board[m][q]->getPieceLoc().getX() == dst.getX() &&
+				board[m][q]->getPieceLoc().getY() == dst.getY())
+			{
+				delete board[m][q];
+				board[m][q] = toPlace;
+				board[m][q]->setLoc(Point(m, q));
+			}
+
+		}
+	}
+
+}
+
+int Game::checkForOwnPiece(Board* board) const
+{
+	Piece*** gameBoard = this->_board->getBoard();
+
+	if (this->_currPlayer == WHITE_PLAYER) 
+	{
+		Point whiteKingLoc = board->getKingWhiteLoc();
+		for (int i = 0; i < ROWS; i++)
+		{
+			for (int j = 0; j < COLS; j++)
+			{
+				if(gameBoard[i][j]->getPieceColor() != WHITE_PLAYER &&
+					gameBoard[i][j]->getPieceType() != TYPE_NULL)
+				{
+					if (gameBoard[i][j]->checkIfMoveValid(board, whiteKingLoc) == VALID_MOVE)
+					{
+						return INVALID_MOVE_CHESS_ON_CURRENT;
+					}
+				}
+			}
+		}
+	}
+	else 
+	{
+		Point blackKing = board->getKingBlackLoc();
+		for (int i = 0; i < ROWS; i++)
+		{
+			for (int j = 0; j < COLS; j++)
+			{
+				if (gameBoard[i][j]->getPieceColor() == WHITE_PLAYER &&
+					gameBoard[i][j]->getPieceType() != TYPE_NULL)
+				{
+					if (gameBoard[i][j]->checkIfMoveValid(board, blackKing) == VALID_MOVE)
+					{
+						return INVALID_MOVE_CHESS_ON_CURRENT;
+					}
+				}
+			}
+		}
+	}
+}
+
+
