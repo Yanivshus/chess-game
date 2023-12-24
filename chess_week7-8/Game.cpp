@@ -283,7 +283,8 @@ int Game::checkForChessOnOp(Board* board, Piece* toCheck)
 		{
 			return VALID_MOVE_CHESS;
 		}
-		else{
+		else
+		{
 			return VALID_MOVE;
 		}
 	}	
