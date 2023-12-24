@@ -17,13 +17,13 @@ int Rook::checkIfMoveValid(Board* board, const Point& dst) const
         if (this->_loc.getY() < dst.getY()) {
             // Move right
             for (i = this->_loc.getY() + 1; i < dst.getY(); ++i)
-                if (board->getPiece(Point(i,this->_loc.getX()))->getPieceType() != NULL_PIECE)
+                if (board->getPiece(Point(i, this->_loc.getX()))->getPieceType() != NULL_PIECE)
                     return INVALID_MOVE_TOOL_MOVE_NOT_RIGHT;
         }
         else {
             // Move left
             for (i = this->_loc.getY() - 1; i > dst.getY(); --i)
-                if (board->getPiece(Point(i,this->_loc.getX()))->getPieceType() != NULL_PIECE)
+                if (board->getPiece(Point(i, this->_loc.getX()))->getPieceType() != NULL_PIECE)
                     return INVALID_MOVE_TOOL_MOVE_NOT_RIGHT;
         }
     }
@@ -32,13 +32,13 @@ int Rook::checkIfMoveValid(Board* board, const Point& dst) const
         if (this->_loc.getX() < dst.getX()) {
             // Move down
             for (i = this->_loc.getX() + 1; i < dst.getX(); ++i)
-                if (board->getPiece(Point(i,this->_loc.getY()))->getPieceType() != NULL_PIECE)
+                if (board->getPiece(Point(this->_loc.getY(),i))->getPieceType() != NULL_PIECE)
                     return INVALID_MOVE_TOOL_MOVE_NOT_RIGHT;
         }
         else {
             // Move up
             for (i = this->_loc.getX() - 1; i > dst.getX(); --i)
-                if (board->getPiece(Point(i,this->_loc.getY()))->getPieceType() != NULL_PIECE)
+                if (board->getPiece(Point(this->_loc.getY(),i))->getPieceType() != NULL_PIECE)
                     return INVALID_MOVE_TOOL_MOVE_NOT_RIGHT;
         }
     }
@@ -47,6 +47,7 @@ int Rook::checkIfMoveValid(Board* board, const Point& dst) const
         return INVALID_MOVE_TOOL_MOVE_NOT_RIGHT;
     }
     return VALID_MOVE;
+
 }
 
 bool Rook::checkIfChessKing(Board* board, const Point& dst) const
