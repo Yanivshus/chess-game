@@ -45,6 +45,6 @@ public:
 	void movePiece(const Point& src, const Point& dst);
 	void undoMove(const Point& src, const Point& dst);
 	int checkForOwnPieceChess(Board* board) const;
-	int checkForChessOnOp(Board* board, )
+	int checkForChessOnOp(Board* board, Piece* toCheck);
 	
 };
