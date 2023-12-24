@@ -22,6 +22,7 @@
 
 #define NULL_PIECE '#'
 #define WHITE_PLAYER_BOARD '0'
+#define BLACK_PLAYER_BOARD '1'
 
 #define COLOR_OF_NULL_PIECE '\0'
 

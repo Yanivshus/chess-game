@@ -2,10 +2,14 @@
 #include "NullPiece.h"
 #include "King.h"
 #include "Rook.h"
+#include <string>
 
 Board::Board(const std::string& board)
 {
+	//problemmmmmmmmmmmm
 	char boardAsString[ROWS][COLS] = { 0 };
+	std::string new_board = board.substr(0, board.size() - 1);
+	std::reverse(new_board.begin(), new_board.end());
 	//looping through the board as a long string and coverting it to 2d array. 
 	for (int i = 0; i < ROWS; i++)
 	{
@@ -29,9 +33,10 @@ Board::Board(const std::string& board)
 			switch (currPiece)
 			{
 			case KING_BLACK:
+				this->_board[q][m] = new King(Point(q, m), BLACK_PLAYER_BOARD,KING_BLACK);
 				break;
 			case ROOK_BLACK:
-
+				this->_board[q][m] = new Rook(Point(q, m), BLACK_PLAYER_BOARD, ROOK_BLACK);
 				break;
 			case PAWN_BLACK:
 				break;
@@ -42,8 +47,10 @@ Board::Board(const std::string& board)
 			case QUEEN_BLACK:
 				break;
 			case KING_WHITE:
+				this->_board[q][m] = new King(Point(q, m), WHITE_PLAYER_BOARD, KING_WHITE);
 				break;
 			case ROOK_WHITE:
+				this->_board[q][m] = new Rook(Point(q, m), WHITE_PLAYER_BOARD, ROOK_WHITE);
 				break;
 			case PAWN_WHITE:
 				break;

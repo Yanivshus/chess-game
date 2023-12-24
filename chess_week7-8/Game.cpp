@@ -3,6 +3,7 @@
 
 Game::Game()
 {
+	this->_pieceBefore = nullptr;
 	this->_board = new Board(STARTER_BOARD);
 	this->_currPlayer = STARTER_BOARD[STARTER_PLAYER];
 }
@@ -20,13 +21,19 @@ std::string Game::turn(const std::string& playerMove)
 	if (playerMove.size() == SIZE_OF_MOVE) {
 		//turning each char of location to a number.
 		srcY = playerMove[0] - OFFSET_Y;
-		srcX = playerMove[1] - OFFSET_X;
+		srcX = playerMove[1] - OFFSET_X - 1;
 		dstY = playerMove[2] - OFFSET_Y;
-		dstX = playerMove[3] - OFFSET_X;
+		dstX = playerMove[3] - OFFSET_X - 1;
 	}
 	//creating points for src and dst.
 	Point src(srcX, srcY);
 	Point dst(dstX, dstY);
+
+	//just for debugging
+	std::cout << getBoardAsString() << std::endl;
+	std::cout << this->_currPlayer << std::endl;
+	//just fro debugging
+
 	//checking if there is somthing wrong with the points.
 	code = checkIfTurnPossible(src, dst);
 	//if nothing wrong we can proceed to move the player.
@@ -45,7 +52,7 @@ std::string Game::turn(const std::string& playerMove)
 			}
 			else 
 			{
-				code = VALID_MOVE;//if note the code will remain valid move.
+				code = VALID_MOVE;//if not the code will remain valid move.
 			}
 		}
 		//if the move caused a chess on the currPlayer king we will undo the move and sent error code for chess out king
@@ -63,7 +70,7 @@ std::string Game::turn(const std::string& playerMove)
 
 
 	//the turn changes after valid move, if move wasnt valid the turn stays on the current player.
-	if (code == VALID_MOVE) {
+	if (code == VALID_MOVE || code == VALID_MOVE_CHESS) {
 		if (this->_currPlayer == WHITE_PLAYER) {
 			this->_currPlayer = BLACK_PLAYER;
 		}
@@ -87,20 +94,23 @@ int Game::checkIfTurnPossible(const Point& src, const Point& dst) const
 	}
 	else {
 		//checking if the src and dst are the same.
-		if (src.getX() == dst.getX() && src.getY() == dst.getX()) 
+		if (src.getX() == dst.getX() && src.getY() == dst.getY()) 
 		{
+			std::cout << "here1" << std::endl;
 			return INVALID_MOVE_SAME_SRC_DST;
 		}
 		else {
 			//checking if the src piece is the same color as in the board.
 			if (this->_board->getPiece(src)->getPieceColor() != this->_currPlayer)
 			{
+				std::cout << "here2" << std::endl;
 				return INVALID_MOVE_NO_TOOL_SRC;
 			}
 			else {
 				//checking if there is current piece in the dst point on the board.
 				if (this->_board->getPiece(dst)->getPieceColor() == this->_currPlayer) 
 				{
+					std::cout << "here3" << std::endl;
 					return INVALID_MOVE_TOOL_AT_DST;
 				}
 				else {
@@ -119,7 +129,10 @@ std::string Game::getBoardAsString() const
 		for (int j = 0; j < COLS; j++)
 		{
 			boardString += this->_board->getPiece(Point(i, j))->getPieceType();
+			boardString += this->_board->getPiece(Point(i, j))->getPieceColor();
+			boardString += " ";
 		}
+		boardString += "\n";
 	}
 	return boardString;
 }
@@ -157,9 +170,7 @@ void Game::movePiece(const Point& src, const Point& dst)
 				board[m][q]->getPieceLoc().getY() == dst.getY())
 			{
 				//checking if the piece from previous moves i saved was deleted if not we will delete it.
-				if (this->_pieceBefore != nullptr) {
-					delete this->_pieceBefore;
-				}
+				delete this->_pieceBefore;
 				this->_pieceBefore = board[m][q];
 				board[m][q] = pieceToMove;
 				board[m][q]->setLoc(Point(m, q));
@@ -186,7 +197,6 @@ void Game::undoMove(const Point& src, const Point& dst)
 				toPlace = board[i][j];
 				board[i][j] = this->_pieceBefore;
 			}
-
 		}
 	}
 	//in the second loop i will find the dst of the undo
@@ -276,8 +286,5 @@ int Game::checkForChessOnOp(Board* board, Piece* toCheck)
 		else{
 			return VALID_MOVE;
 		}
-	}
-	
+	}	
 }
-
-

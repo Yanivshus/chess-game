@@ -1,5 +1,6 @@
 #pragma once
 #include "Piece.h"
+#define OFFSET 1
 
 class King : public Piece {
 public:

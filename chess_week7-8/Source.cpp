@@ -3,10 +3,11 @@ This file servers as an example of how to use Pipe.h file.
 It is recommended to use the following code in your project, 
 in order to read and write information from and to the Backend
 */
-
+#include "Game.h"
 #include "Pipe.h"
 #include <iostream>
 #include <thread>
+#include <string>
 
 using std::cout;
 using std::endl;
@@ -41,15 +42,15 @@ void main()
 		}
 	}
 	
-
+	Game game;
+	std::string codeFromBack = "";
 	char msgToGraphics[1024];
 	// msgToGraphics should contain the board string accord the protocol
 	// YOUR CODE
-
-	strcpy_s(msgToGraphics, "rnbkqbnrpppppppp################################PPPPPPPPRNBKQBNR1"); // just example...
+	//orginial = "rnbkqbnrpppppppp################################PPPPPPPPRNBKQBNR1"
+	strcpy_s(msgToGraphics, "r##k###r################################################R###K##R0"); // just example...
 	
 	p.sendMessageToGraphics(msgToGraphics);   // send the board string
-
 	// get message from graphics
 	string msgFromGraphics = p.getMessageFromGraphics();
 
@@ -57,9 +58,9 @@ void main()
 	{
 		// should handle the string the sent from graphics
 		// according the protocol. Ex: e2e4           (move e2 to e4)
-		
+		codeFromBack = game.turn(msgFromGraphics);
 		// YOUR CODE
-		strcpy_s(msgToGraphics, "1\0"); // msgToGraphics should contain the result of the operation
+		strcpy_s(msgToGraphics, codeFromBack.c_str()); // msgToGraphics should contain the result of the operation
 
 
 		// return result to graphics		
