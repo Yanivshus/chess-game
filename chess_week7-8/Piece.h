@@ -24,7 +24,7 @@ public:
 	Piece(const Point& loc, const char color, const char type);
 	virtual ~Piece();
 	virtual int checkIfMoveValid(Board* board, const Point& dst) const = 0;
-	virtual bool checkIfChessKing(Board* board, const Point& dest) const = 0;
+	
 	char getPieceType();
 	char getPieceColor();
 	void setLoc(const Point& other);

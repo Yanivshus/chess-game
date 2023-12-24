@@ -43,6 +43,10 @@ public:
 	/// </summary>
 	/// <returns>the y oordinent.</returns>
 	double getY() const;
+	
+	void setX(const double x);
+	void setY(const double y);
+	
 
 private:
 	double _x;

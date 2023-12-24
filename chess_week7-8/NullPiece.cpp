@@ -13,7 +13,4 @@ int NullPiece::checkIfMoveValid(Board* board, const Point& dst) const
 	return 0;
 }
 
-bool NullPiece::checkIfChessKing(Board* board, const Point& dest) const
-{
-	return false;
-}
+

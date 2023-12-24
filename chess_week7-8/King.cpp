@@ -17,9 +17,3 @@ int King::checkIfMoveValid(Board* board, const Point& dst) const
     }
     return INVALID_MOVE_TOOL_MOVE_NOT_RIGHT;
 }
-
-
-bool King::checkIfChessKing(Board* board, const Point& dest) const
-{
-	return false;
-}

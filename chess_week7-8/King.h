@@ -9,5 +9,5 @@ public:
 	~King();
 
 	virtual int checkIfMoveValid(Board* board, const Point& dst) const override;
-	virtual bool checkIfChessKing(Board* board, const Point& dest) const override;
+	
 };

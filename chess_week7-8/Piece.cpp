@@ -25,7 +25,8 @@ char Piece::getPieceColor()
 
 void Piece::setLoc(const Point& other)
 {
-	this->_loc = other;
+	this->_loc.setX(other.getX());
+	this->_loc.setY(other.getY());
 }
 
 Point Piece::getPieceLoc()
