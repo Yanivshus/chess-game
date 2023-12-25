@@ -54,6 +54,7 @@ std::string Game::turn(const std::string& playerMove)
 			{
 				code = VALID_MOVE;//if not the code will remain valid move.
 			}
+			
 		}
 		//if the move caused a chess on the currPlayer king we will undo the move and sent error code for chess out king
 		if (checkForOwnPieceChess(this->_board) == INVALID_MOVE_CHESS_ON_CURRENT)
@@ -61,6 +62,12 @@ std::string Game::turn(const std::string& playerMove)
 			code = INVALID_MOVE_CHESS_ON_CURRENT;
 			undoMove(dst, src);
 		}
+		else 
+		{//if there wasn't an undo needed i will delete the piece i saved.
+			delete this->_pieceBefore;
+			this->_pieceBefore = nullptr;
+		}
+		
 		
 	}
 	else
@@ -96,21 +103,18 @@ int Game::checkIfTurnPossible(const Point& src, const Point& dst) const
 		//checking if the src and dst are the same.
 		if (src.getX() == dst.getX() && src.getY() == dst.getY()) 
 		{
-			std::cout << "here1" << std::endl;
 			return INVALID_MOVE_SAME_SRC_DST;
 		}
 		else {
 			//checking if the src piece is the same color as in the board.
 			if (this->_board->getPiece(src)->getPieceColor() != this->_currPlayer)
 			{
-				std::cout << "here2" << std::endl;
 				return INVALID_MOVE_NO_TOOL_SRC;
 			}
 			else {
 				//checking if there is current piece in the dst point on the board.
 				if (this->_board->getPiece(dst)->getPieceColor() == this->_currPlayer) 
 				{
-					std::cout << "here3" << std::endl;
 					return INVALID_MOVE_TOOL_AT_DST;
 				}
 				else {
@@ -156,7 +160,7 @@ void Game::movePiece(const Point& src, const Point& dst)
 				board[i][j]->getPieceLoc().getY() == src.getY())
 			{
 				board[i][j] = new NullPiece(Point(i, j), TYPE_NULL, TYPE_NULL);
-
+					
 			}
 
 		}
@@ -170,7 +174,6 @@ void Game::movePiece(const Point& src, const Point& dst)
 				board[m][q]->getPieceLoc().getY() == dst.getY())
 			{
 				//checking if the piece from previous moves i saved was deleted if not we will delete it.
-				//delete this->_pieceBefore;
 				this->_pieceBefore = board[m][q];
 				board[m][q] = pieceToMove;
 				board[m][q]->setLoc(Point(m, q));
@@ -210,7 +213,7 @@ void Game::undoMove(const Point& src, const Point& dst)
 			if (board[m][q]->getPieceLoc().getX() == dst.getX() &&
 				board[m][q]->getPieceLoc().getY() == dst.getY())
 			{
-				//delete board[m][q];
+				delete board[m][q];
 				board[m][q] = toPlace;
 				board[m][q]->setLoc(Point(m, q));
 			}
