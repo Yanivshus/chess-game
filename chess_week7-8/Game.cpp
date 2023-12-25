@@ -170,7 +170,7 @@ void Game::movePiece(const Point& src, const Point& dst)
 				board[m][q]->getPieceLoc().getY() == dst.getY())
 			{
 				//checking if the piece from previous moves i saved was deleted if not we will delete it.
-				delete this->_pieceBefore;
+				//delete this->_pieceBefore;
 				this->_pieceBefore = board[m][q];
 				board[m][q] = pieceToMove;
 				board[m][q]->setLoc(Point(m, q));
@@ -210,7 +210,7 @@ void Game::undoMove(const Point& src, const Point& dst)
 			if (board[m][q]->getPieceLoc().getX() == dst.getX() &&
 				board[m][q]->getPieceLoc().getY() == dst.getY())
 			{
-				delete board[m][q];
+				//delete board[m][q];
 				board[m][q] = toPlace;
 				board[m][q]->setLoc(Point(m, q));
 			}
