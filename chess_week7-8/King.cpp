@@ -11,9 +11,13 @@ King::~King()
 int King::checkIfMoveValid(Board* board, const Point& dst) const
 {
     bool validMoveKing = abs(this->_loc.getX() - dst.getX()) <= OFFSET && abs(this->_loc.getY()- dst.getY()) <= OFFSET;
-    if (validMoveKing)
+    if (validMoveKing == true)
     {
         return VALID_MOVE;
     }
-    return INVALID_MOVE_TOOL_MOVE_NOT_RIGHT;
+    else
+    {
+        return INVALID_MOVE_TOOL_MOVE_NOT_RIGHT;
+    }
 }
+    

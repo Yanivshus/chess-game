@@ -21,10 +21,24 @@ protected:
 	char _color;
 	char _type;
 public:
+	/// <summary>
+	/// constractor for abstract piece.
+	/// </summary>
+	/// <param name="loc:">loaction of the piece.</param>
+	/// <param name="color:">color of the piece.</param>
+	/// <param name="type:">type of the piece.</param>
 	Piece(const Point& loc, const char color, const char type);
 	virtual ~Piece();
+
+	/// <summary>
+	/// check if the piece movment is valid.
+	/// </summary>
+	/// <param name="board:">game board.</param>
+	/// <param name="dst:">where the piece moving to.</param>
+	/// <returns></returns>
 	virtual int checkIfMoveValid(Board* board, const Point& dst) const = 0;
 	
+	//getters and setters for fields.
 	char getPieceType();
 	char getPieceColor();
 	void setLoc(const Point& other);

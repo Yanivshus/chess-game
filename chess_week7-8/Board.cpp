@@ -16,19 +16,21 @@ Board::Board(const std::string& board)
 			boardAsString[i][j] = board[i * COLS + j];
 		}
 	}
-
+	//looping throgh the board and allocating space for each piece.
 	this->_board = new Piece**[ROWS];
 	for (int k = 0; k < ROWS; k++)
 	{
 		_board[k] = new Piece*[COLS]; //intalizing the array
 	}
 
+	//looping another time on the board.
 	for (int q = 0; q < ROWS; q++)
 	{
 		for (int m = 0; m < COLS; m++)
 		{
+			//getting the location from the board 2d array of chars and creting by the char the current piece.
 			char currPiece = boardAsString[q][m];
-			switch (currPiece)
+			switch (currPiece)//allocting memmory by the type.
 			{
 			case KING_BLACK:
 				this->_board[q][m] = new King(Point(q, m), BLACK_PLAYER_BOARD,KING_BLACK);
@@ -123,6 +125,7 @@ Piece*** Board::getBoard() const
 
 Piece* Board::getPiece(Point src) const
 {
+	//looking for the piece in the src location.
 	for (int i = 0; i < ROWS; i++)
 	{
 		for (int j = 0; j < ROWS; j++)

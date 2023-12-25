@@ -21,9 +21,12 @@ std::string Game::turn(const std::string& playerMove)
 	if (playerMove.size() == SIZE_OF_MOVE) {
 		//turning each char of location to a number.
 		srcY = playerMove[0] - OFFSET_Y;
-		srcX = playerMove[1] - OFFSET_X - 1;
+		srcX = playerMove[1] - OFFSET_X - X_NULLER_OFFSET;
 		dstY = playerMove[2] - OFFSET_Y;
-		dstX = playerMove[3] - OFFSET_X - 1;
+		dstX = playerMove[3] - OFFSET_X - X_NULLER_OFFSET;
+	}
+	else {
+		return std::to_string(INVALID_MOVE_OUT_OF_INDEX) + '\0';
 	}
 	//creating points for src and dst.
 	Point src(srcX, srcY);
@@ -32,7 +35,7 @@ std::string Game::turn(const std::string& playerMove)
 	//just for debugging
 	std::cout << getBoardAsString() << std::endl;
 	std::cout << this->_currPlayer << std::endl;
-	//just fro debugging
+	//just for debugging
 
 	//checking if there is somthing wrong with the points.
 	code = checkIfTurnPossible(src, dst);
@@ -67,8 +70,6 @@ std::string Game::turn(const std::string& playerMove)
 			delete this->_pieceBefore;
 			this->_pieceBefore = nullptr;
 		}
-		
-		
 	}
 	else
 	{//if somthing were wrong with the specific move we will return the code.
@@ -194,6 +195,7 @@ void Game::undoMove(const Point& src, const Point& dst)
 	{
 		for (int j = 0; j < COLS; j++)
 		{
+			//found the src loc i will recreate.
 			if (board[i][j]->getPieceLoc().getX() == src.getX() &&
 				board[i][j]->getPieceLoc().getY() == src.getY())
 			{
@@ -209,7 +211,7 @@ void Game::undoMove(const Point& src, const Point& dst)
 	{
 		for (int q = 0; q < COLS; q++)
 		{
-
+			//found the dst piece for switching.
 			if (board[m][q]->getPieceLoc().getX() == dst.getX() &&
 				board[m][q]->getPieceLoc().getY() == dst.getY())
 			{
@@ -227,16 +229,18 @@ int Game::checkForOwnPieceChess(Board* board) const
 {
 	Piece*** gameBoard = this->_board->getBoard();
 
+	//checking if the player is white.
+	//if yes i will find the king location on the board.
 	if (this->_currPlayer == WHITE_PLAYER) 
 	{
 		Point whiteKingLoc = board->getKingWhiteLoc();
 		for (int i = 0; i < ROWS; i++)
 		{
 			for (int j = 0; j < COLS; j++)
-			{
+			{//after i found the pieces from the other player i will pass them the king loction.
 				if(gameBoard[i][j]->getPieceColor() != WHITE_PLAYER &&
 					gameBoard[i][j]->getPieceType() != TYPE_NULL)
-				{
+				{//if the op player piece can it my king it meanes chess was made.
 					if (gameBoard[i][j]->checkIfMoveValid(board, whiteKingLoc) == VALID_MOVE)
 					{
 						return INVALID_MOVE_CHESS_ON_CURRENT;
@@ -246,7 +250,7 @@ int Game::checkForOwnPieceChess(Board* board) const
 		}
 	}
 	else 
-	{
+	{//if the player is not white we will do all the process mentioned before all over again but switching the colors.
 		Point blackKing = board->getKingBlackLoc();
 		for (int i = 0; i < ROWS; i++)
 		{

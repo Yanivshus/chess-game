@@ -13,6 +13,7 @@
 
 #define OFFSET_Y 'a'
 #define OFFSET_X '0'
+#define X_NULLER_OFFSET 1
 
 #define TYPE_NULL '#'
 
@@ -40,12 +41,59 @@ public:
 	Game();
 	~Game();
 
+	/// <summary>
+	/// we will menaged most of the game in turn.
+	/// player switces, and the whole game checks.
+	///	meant also for moving players.
+	/// </summary>
+	/// <param name="playerMove:">the player move we will get from the frontend.</param>
+	/// <returns>all posiible code: 1-8</returns>
 	std::string turn(const std::string& playerMove);
+
+	/// <summary>
+	/// checks if there is a movement to the same place.
+	/// if there is a player from the same color in the dest.
+	/// if the dst and src are the same point.
+	/// if the dst and src are in the board limits.
+	/// </summary>
+	/// <param name="src:">move from cord</param>
+	/// <param name="dst:">move to cord</param>
+	/// <returns></returns>
 	int checkIfTurnPossible(const Point& src, const Point& dst) const;
+	
+	/// <summary>
+	/// return the board as a string.
+	/// </summary>
+	/// <returns>std::string board values.</returns>
 	std::string getBoardAsString() const;
+
+	/// <summary>
+	/// moves a piece from src to dst.
+	/// </summary>
+	/// <param name="src:">point to move from.</param>
+	/// <param name="dst:">point to move to.</param>
 	void movePiece(const Point& src, const Point& dst);
+	
+	/// <summary>
+	/// undos a move made on a player.
+	/// </summary>
+	/// <param name="src:">point to move from.</param>
+	/// <param name="dst">point to move to.</param>
 	void undoMove(const Point& src, const Point& dst);
+
+	/// <summary>
+	/// checks if the is a chess on the king from the same color after a move is made.
+	/// </summary>
+	/// <param name="board:">board of the game.</param>
+	/// <returns>4 if chess was made.</returns>
 	int checkForOwnPieceChess(Board* board) const;
+
+	/// <summary>
+	/// checks if there is chesss on op king by a curr player move.
+	/// </summary>
+	/// <param name="board:">board of the game.</param>
+	/// <param name="toCheck:">piece to check on.</param>
+	/// <returns>1 if a chess were made 0 if not.</returns>
 	int checkForChessOnOp(Board* board, Piece* toCheck);
 	
 };
