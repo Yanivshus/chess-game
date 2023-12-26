@@ -6,6 +6,7 @@
 
 Board::Board(const std::string& board)
 {
+	//try branches
 	//problemmmmmmmmmmmm
 	char boardAsString[ROWS][COLS] = { 0 };
 	//looping through the board as a long string and coverting it to 2d array. 
