@@ -6,7 +6,7 @@ Point::Point()
 	this->_y = 0;
 }
 
-Point::Point(const double x, const double y)
+Point::Point(const int x, const int y)
 {
 	this->_x = x;
 	this->_y = y;
@@ -32,22 +32,22 @@ Point& Point::operator+=(const Point& other)
 	return *this;
 }
 
-double Point::getX() const
+int Point::getX() const
 {
 	return this->_x;
 }
 
-double Point::getY() const
+int Point::getY() const
 {
 	return this->_y;
 }
 
-void Point::setX(const double x)
+void Point::setX(const int x)
 {
 	this->_x = x;
 }
 
-void Point::setY(const double y)
+void Point::setY(const int y)
 {
 	this->_y = y;
 }

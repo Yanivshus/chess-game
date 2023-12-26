@@ -10,7 +10,7 @@ NullPiece::~NullPiece()
 
 int NullPiece::checkIfMoveValid(Board* board, const Point& dst) const
 {
-	return 0;
+	return 3;
 }
 
 
