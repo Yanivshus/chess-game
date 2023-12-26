@@ -165,13 +165,27 @@ void Game::undoMove(const Point& src, const Point& dst)
 	Piece*** board = this->_board->getBoard();
 
 	swap(&board[dst.getX()][dst.getY()], &board[src.getX()][src.getY()]);
-	swap(&board[src.getX()][src.getY()], &this->_pieceBefore);
+
+	std::cout << board[dst.getX()][dst.getY()]->getPieceType() << std::endl;
+	std::cout << board[src.getX()][src.getY()]->getPieceType() << std::endl;
+
+	swap(&board[dst.getX()][dst.getY()], &this->_pieceBefore);//the error is here in the swap.
+	//for some reason a player is dissapereanig.
+	std::cout << board[dst.getX()][dst.getY()]->getPieceType() << std::endl;
+	std::cout << board[src.getX()][src.getY()]->getPieceType() << std::endl;
+	//in the chack you can see R # # # and not R # R # like it should.
+
+	
+	delete this->_pieceBefore;
+	this->_pieceBefore = nullptr;
 
 	//*board[dst.getX()][dst.getY()] = *board[src.getX()][src.getY()];
 	//*board[src.getX()][src.getY()] = *this->_pieceBefore;
 
-	board[dst.getX()][dst.getY()]->setLoc(Point(dst.getX(), dst.getY()));
-	board[src.getX()][src.getY()]->setLoc(Point(src.getX(), src.getY()));
+	board[dst.getX()][dst.getY()]->setLoc(Point(src.getX(), src.getY()));
+	//std::cout << board[dst.getX()][dst.getY()]->getPieceType() << std::endl;
+	board[src.getX()][src.getY()]->setLoc(Point(dst.getX(), dst.getY()));
+	//std::cout << board[src.getX()][src.getY()]->getPieceType() << std::endl;
 }
 
 
