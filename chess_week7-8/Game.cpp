@@ -1,5 +1,6 @@
 #include "Game.h"
 //#include "King.h"
+#include <exception>
 
 Game::Game()
 {
@@ -60,7 +61,7 @@ std::string Game::turn(const std::string& playerMove)
 			code = INVALID_MOVE_CHESS_ON_CURRENT;
 			undoMove(dst, src);
 		}
-		else 
+		else
 		{//if there wasn't an undo needed i will delete the piece i saved.
 			delete this->_pieceBefore;
 			this->_pieceBefore = nullptr;
