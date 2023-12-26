@@ -32,11 +32,6 @@ std::string Game::turn(const std::string& playerMove)
 	Point src(srcX, srcY);
 	Point dst(dstX, dstY);
 
-	//just for debugging
-	std::cout << getBoardAsString() << std::endl;
-	std::cout << this->_currPlayer << std::endl;
-	//just for debugging
-
 	//checking if there is somthing wrong with the points.
 	code = checkIfTurnPossible(src, dst);
 	//if nothing wrong we can proceed to move the player.
@@ -70,6 +65,10 @@ std::string Game::turn(const std::string& playerMove)
 			delete this->_pieceBefore;
 			this->_pieceBefore = nullptr;
 		}
+		//just for debugging
+		std::cout << getBoardAsString() << std::endl;
+		std::cout << this->_currPlayer << std::endl;
+		//just for debugging
 	}
 	else
 	{//if somthing were wrong with the specific move we will return the code.
