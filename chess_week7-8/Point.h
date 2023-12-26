@@ -13,7 +13,7 @@ public:
 	/// </summary>
 	/// <param name="x:">the x value.</param>
 	/// <param name="y:">the y value</param>
-	Point(const double x, const double y);
+	Point(const int x, const int y);
 
 	// Destructor
 	~Point();
@@ -36,20 +36,20 @@ public:
 	/// return the x coordinent.
 	/// </summary>
 	/// <returns>the x oordinent.</returns>
-	double getX() const;
+	int getX() const;
 
 	/// <summary>
 	/// return the y coordinent.
 	/// </summary>
 	/// <returns>the y oordinent.</returns>
-	double getY() const;
+	int getY() const;
 	
-	void setX(const double x);
-	void setY(const double y);
+	void setX(const int x);
+	void setY(const int y);
 	
 
 private:
-	double _x;
-	double _y;
+	int _x;
+	int _y;
 
 };

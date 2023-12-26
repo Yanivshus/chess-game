@@ -6,7 +6,7 @@
 
 #define STARTER_PLAYER 64
 //originial = "rnbkqbnrpppppppp################################PPPPPPPPRNBKQBNR1"
-#define STARTER_BOARD "r###k##r################################################R##K###R0"
+#define STARTER_BOARD "r###k##r################################################R###K##R0"
 
 #define WHITE_PLAYER '0'
 #define BLACK_PLAYER '1'
@@ -95,5 +95,8 @@ public:
 	/// <param name="toCheck:">piece to check on.</param>
 	/// <returns>1 if a chess were made 0 if not.</returns>
 	int checkForChessOnOp(Board* board, Piece* toCheck);
+
+
+	void swap(Piece** src, Piece** dst);
 	
 };
