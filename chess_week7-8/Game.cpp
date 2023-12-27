@@ -1,6 +1,4 @@
 #include "Game.h"
-//#include "King.h"
-#include <exception>
 
 Game::Game()
 {
@@ -138,22 +136,22 @@ std::string Game::getBoardAsString() const
 }
 
 
-
-
-
 void Game::movePiece(const Point& src, const Point& dst)
 {
 	
 	Piece*** board = this->_board->getBoard();
 	delete this->_pieceBefore;
-	this->_pieceBefore = new NullPiece(Point(src.getX(), src.getY()), TYPE_NULL, TYPE_NULL);
+	this->_pieceBefore = new NullPiece(Point(src.getX(), src.getY()), TYPE_NULL, TYPE_NULL);//creting the null piece for the before spot.
 
 
 	swap(&board[dst.getX()][dst.getY()], &this->_pieceBefore);
+
+	//for debugging
 	std::cout << "" << std::endl;
 	std::cout << this->_pieceBefore->getPieceType() << std::endl;
 	std::cout << "" << std::endl;
-	swap(&board[src.getX()][src.getY()], &board[dst.getX()][dst.getY()]);
+
+	swap(&board[src.getX()][src.getY()], &board[dst.getX()][dst.getY()]);//now swapping.
 	board[dst.getX()][dst.getY()]->setLoc(Point(dst.getX(), dst.getY()));
 }
 
@@ -164,25 +162,18 @@ void Game::undoMove(const Point& src, const Point& dst)
 
 	swap(&board[src.getX()][src.getY()], &board[dst.getX()][dst.getY()]);
 
-	std::cout << board[dst.getX()][dst.getY()]->getPieceType() << std::endl;
+	std::cout << board[dst.getX()][dst.getY()]->getPieceType() << std::endl;//for debugging.
 	std::cout << board[src.getX()][src.getY()]->getPieceType() << std::endl;
 
 	swap(&board[dst.getX()][dst.getY()], &this->_pieceBefore);//the error is here in the swap.
+
 	//for some reason a player is dissapereanig.
-	std::cout << board[dst.getX()][dst.getY()]->getPieceType() << std::endl;
+	std::cout << board[dst.getX()][dst.getY()]->getPieceType() << std::endl;//for debugging.
 	std::cout << board[src.getX()][src.getY()]->getPieceType() << std::endl;
-	//in the chack you can see R # # # and not R # R # like it should.
-	// 
-	//*board[dst.getX()][dst.getY()] = *board[src.getX()][src.getY()];
-	//*board[dst.getX()][dst.getY()] = *this->_pieceBefore;
 
-	//delete this->_pieceBefore;
-	//this->_pieceBefore = nullptr;
-
+	//setting ne locations
 	board[dst.getX()][dst.getY()]->setLoc(Point(dst.getX(), dst.getY()));
-	//std::cout << board[dst.getX()][dst.getY()]->getPieceType() << std::endl;
 	board[src.getX()][src.getY()]->setLoc(Point(src.getX(), src.getY()));
-	//std::cout << board[src.getX()][src.getY()]->getPieceType() << std::endl;
 }
 
 

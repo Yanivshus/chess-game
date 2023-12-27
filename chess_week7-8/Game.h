@@ -96,7 +96,11 @@ public:
 	/// <returns>1 if a chess were made 0 if not.</returns>
 	int checkForChessOnOp(Board* board, Piece* toCheck);
 
-
+	/// <summary>
+	/// swapping between to pinnters
+	/// </summary>
+	/// <param name="src:">src pointer</param>
+	/// <param name="dst:">dst pointer</param>
 	void swap(Piece** src, Piece** dst);
 	
 };
