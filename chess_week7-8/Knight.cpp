@@ -30,7 +30,6 @@ int Knight::checkIfMoveValid(Board* board, const Point& dst) const
 		(srcX + 1 == dstX && srcY + 2 == dstY) ||
 		(srcX - 1 == dstX && srcY + 2 == dstY) ||
 		(srcX - 2 == dstX && srcY + 1 == dstY)) // done the right side possibilities.
-
 	{
 		return VALID_MOVE;
 	}
