@@ -27,7 +27,7 @@
 #define COLOR_OF_NULL_PIECE '\0'
 
 class Piece;
-class NullPiece;
+//class NullPiece;
 
 class Board {
 private:

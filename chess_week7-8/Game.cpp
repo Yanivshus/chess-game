@@ -53,19 +53,14 @@ std::string Game::turn(const std::string& playerMove)
 			{
 				code = VALID_MOVE;//if not the code will remain valid move.
 			}
-			
+			//if the move caused a chess on the currPlayer king we will undo the move and sent error code for chess out king
+			if (checkForOwnPieceChess(this->_board) == INVALID_MOVE_CHESS_ON_CURRENT)
+			{
+				code = INVALID_MOVE_CHESS_ON_CURRENT;
+				undoMove(src, dst);
+			}
 		}
-		//if the move caused a chess on the currPlayer king we will undo the move and sent error code for chess out king
-		if (checkForOwnPieceChess(this->_board) == INVALID_MOVE_CHESS_ON_CURRENT)
-		{
-			code = INVALID_MOVE_CHESS_ON_CURRENT;
-			undoMove(dst, src);
-		}
-		else
-		{//if there wasn't an undo needed i will delete the piece i saved.
-			//delete this->_pieceBefore;
-			//this->_pieceBefore = nullptr;
-		}
+
 		//just for debugging
 		std::cout << getBoardAsString() << std::endl;
 		std::cout << this->_currPlayer << std::endl;
@@ -150,11 +145,14 @@ void Game::movePiece(const Point& src, const Point& dst)
 {
 	
 	Piece*** board = this->_board->getBoard();
+	delete this->_pieceBefore;
+	this->_pieceBefore = new NullPiece(Point(src.getX(), src.getY()), TYPE_NULL, TYPE_NULL);
 
-	this->_pieceBefore = board[dst.getX()][dst.getY()];
 
-
-	board[dst.getX()][dst.getY()] = new NullPiece(Point(src.getX(), src.getY()), TYPE_NULL, TYPE_NULL);
+	swap(&board[dst.getX()][dst.getY()], &this->_pieceBefore);
+	std::cout << "" << std::endl;
+	std::cout << this->_pieceBefore->getPieceType() << std::endl;
+	std::cout << "" << std::endl;
 	swap(&board[src.getX()][src.getY()], &board[dst.getX()][dst.getY()]);
 	board[dst.getX()][dst.getY()]->setLoc(Point(dst.getX(), dst.getY()));
 }
@@ -164,7 +162,7 @@ void Game::undoMove(const Point& src, const Point& dst)
 {
 	Piece*** board = this->_board->getBoard();
 
-	swap(&board[dst.getX()][dst.getY()], &board[src.getX()][src.getY()]);
+	swap(&board[src.getX()][src.getY()], &board[dst.getX()][dst.getY()]);
 
 	std::cout << board[dst.getX()][dst.getY()]->getPieceType() << std::endl;
 	std::cout << board[src.getX()][src.getY()]->getPieceType() << std::endl;
@@ -181,9 +179,9 @@ void Game::undoMove(const Point& src, const Point& dst)
 	//delete this->_pieceBefore;
 	//this->_pieceBefore = nullptr;
 
-	board[dst.getX()][dst.getY()]->setLoc(Point(src.getX(), src.getY()));
+	board[dst.getX()][dst.getY()]->setLoc(Point(dst.getX(), dst.getY()));
 	//std::cout << board[dst.getX()][dst.getY()]->getPieceType() << std::endl;
-	board[src.getX()][src.getY()]->setLoc(Point(dst.getX(), dst.getY()));
+	board[src.getX()][src.getY()]->setLoc(Point(src.getX(), src.getY()));
 	//std::cout << board[src.getX()][src.getY()]->getPieceType() << std::endl;
 }
 
