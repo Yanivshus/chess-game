@@ -6,7 +6,7 @@
 
 #define STARTER_PLAYER 64
 //originial = "rnbkqbnrpppppppp################################PPPPPPPPRNBKQBNR1"
-#define STARTER_BOARD "r###k##r################################################R###K##R0"
+#define STARTER_BOARD "rnbqkbnr################################################RNBQKBNR0"
 
 #define WHITE_PLAYER '0'
 #define BLACK_PLAYER '1'
