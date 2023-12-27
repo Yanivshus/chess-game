@@ -2,6 +2,9 @@
 #include "NullPiece.h"
 #include "King.h"
 #include "Rook.h"
+#include "Bishop.h"
+#include "Knight.h"
+#include "Queen.h"
 #include <string>
 
 Board::Board(const std::string& board)
@@ -41,10 +44,13 @@ Board::Board(const std::string& board)
 			case PAWN_BLACK:
 				break;
 			case KNIGHT_BLACK:
+				this->_board[q][m] = new Knight(Point(q, m), BLACK_PLAYER_BOARD, KNIGHT_BLACK);
 				break;
 			case BISHOP_BLACK:
+				this->_board[q][m] = new Bishop(Point(q, m), BLACK_PLAYER_BOARD, BISHOP_BLACK);
 				break;
 			case QUEEN_BLACK:
+				this->_board[q][m] = new Queen(Point(q, m), BLACK_PLAYER_BOARD, QUEEN_BLACK);
 				break;
 			case KING_WHITE:
 				this->_board[q][m] = new King(Point(q, m), WHITE_PLAYER_BOARD, KING_WHITE);
@@ -55,10 +61,13 @@ Board::Board(const std::string& board)
 			case PAWN_WHITE:
 				break;
 			case KNIGHT_WHITE:
+				this->_board[q][m] = new Knight(Point(q, m), WHITE_PLAYER_BOARD, KNIGHT_WHITE);
 				break;
 			case BISHOP_WHITE:
+				this->_board[q][m] = new Bishop(Point(q, m), WHITE_PLAYER_BOARD, BISHOP_WHITE);
 				break;
 			case QUEEN_WHITE:
+				this->_board[q][m] = new Queen(Point(q, m), WHITE_PLAYER_BOARD, QUEEN_WHITE);
 				break;
 			case NULL_PIECE:
 				this->_board[q][m] = new NullPiece(Point(q,m), NULL_PIECE, NULL_PIECE);
