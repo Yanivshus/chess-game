@@ -174,13 +174,12 @@ void Game::undoMove(const Point& src, const Point& dst)
 	std::cout << board[dst.getX()][dst.getY()]->getPieceType() << std::endl;
 	std::cout << board[src.getX()][src.getY()]->getPieceType() << std::endl;
 	//in the chack you can see R # # # and not R # R # like it should.
-
-	
-	delete this->_pieceBefore;
-	this->_pieceBefore = nullptr;
-
+	// 
 	//*board[dst.getX()][dst.getY()] = *board[src.getX()][src.getY()];
-	//*board[src.getX()][src.getY()] = *this->_pieceBefore;
+	//*board[dst.getX()][dst.getY()] = *this->_pieceBefore;
+
+	//delete this->_pieceBefore;
+	//this->_pieceBefore = nullptr;
 
 	board[dst.getX()][dst.getY()]->setLoc(Point(src.getX(), src.getY()));
 	//std::cout << board[dst.getX()][dst.getY()]->getPieceType() << std::endl;

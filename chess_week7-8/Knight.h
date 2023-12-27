@@ -1,9 +1,9 @@
 #pragma once
 #include "Piece.h"
 
-class Rook : public Piece {
+class Knight : public Piece {
 public:
-	Rook(const Point& loc, const char color, const char type);
-	~Rook();
+	Knight(const Point& loc, const char color, const char type);
+	~Knight();
 	virtual int checkIfMoveValid(Board* board, const Point& dst) const override;
 };
