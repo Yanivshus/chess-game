@@ -40,8 +40,8 @@ int Pawn::checkIfMoveValid(Board* board, const Point& dst) const
 			{
 				if (srcX + 2 == dstX && srcY == dstY)//if it is 1 squaere jump and 2 square jumps are allowed.
 				{//checking if there are pieces in the way or in the dst.
-					if (gameBoard[srcX + 1][srcY]->getPieceType() == NULL_PIECE &&
-						gameBoard[srcX + 2][srcY]->getPieceType() == NULL_PIECE)
+					if (gameBoard[srcX + 1][srcY]->getPieceColor() == NULL_PIECE &&
+						gameBoard[srcX + 2][srcY]->getPieceColor() == NULL_PIECE)
 					{
 						this->_isFirst = FALSE;
 						return VALID_MOVE;
@@ -50,13 +50,10 @@ int Pawn::checkIfMoveValid(Board* board, const Point& dst) const
 					{
 						return INVALID_MOVE_TOOL_MOVE_NOT_RIGHT;
 					}
-
-					//this->_isFirst = FALSE;
-					//return VALID_MOVE;
 				}
 				else if (srcX + 1 == dstX && srcY == dstY)
 				{//checking if there are pieces in the way or in the dst.
-					if (gameBoard[srcX + 1][srcY]->getPieceType() == NULL_PIECE)
+					if (gameBoard[srcX + 1][srcY]->getPieceColor() == NULL_PIECE)
 					{
 						return VALID_MOVE;
 					}
@@ -74,7 +71,14 @@ int Pawn::checkIfMoveValid(Board* board, const Point& dst) const
 			{
 				if (srcX + 1 == dstX && srcY == dstY)//if its not first move we will just check for 1 step.
 				{
-					return VALID_MOVE;
+					if (gameBoard[dstX][dstY]->getPieceColor() == NULL_PIECE)//checking if there is a place to move to.
+					{
+						return VALID_MOVE;
+					}
+					else
+					{
+						return INVALID_MOVE_TOOL_MOVE_NOT_RIGHT;
+					}
 				}
 				else
 				{
@@ -106,8 +110,8 @@ int Pawn::checkIfMoveValid(Board* board, const Point& dst) const
 			{
 				if (srcX - 2 == dstX && srcY == dstY)//if it is 1 squaere jump and 2 square jumps are allowed.
 				{//checking if there are pieces in the way or in the dst.
-					if (gameBoard[srcX - 1][srcY]->getPieceType() == NULL_PIECE &&
-						gameBoard[srcX - 2][srcY]->getPieceType() == NULL_PIECE)
+					if (gameBoard[srcX - 1][srcY]->getPieceColor() == NULL_PIECE &&
+						gameBoard[srcX - 2][srcY]->getPieceColor() == NULL_PIECE)
 					{
 						this->_isFirst = FALSE;
 						return VALID_MOVE;
@@ -116,13 +120,10 @@ int Pawn::checkIfMoveValid(Board* board, const Point& dst) const
 					{
 						return INVALID_MOVE_TOOL_MOVE_NOT_RIGHT;
 					}
-
-					//this->_isFirst = FALSE;
-					//return VALID_MOVE;
 				}
 				else if (srcX - 1 == dstX && srcY == dstY)
 				{//checking if there are pieces in the way or in the dst.
-					if (gameBoard[srcX - 1][srcY]->getPieceType() == NULL_PIECE)
+					if (gameBoard[srcX - 1][srcY]->getPieceColor() == NULL_PIECE)
 					{
 						return VALID_MOVE;
 					}
@@ -140,7 +141,14 @@ int Pawn::checkIfMoveValid(Board* board, const Point& dst) const
 			{
 				if (srcX - 1 == dstX && srcY == dstY)//if its not first move we will just check for 1 step.
 				{
-					return VALID_MOVE;
+					if (gameBoard[srcX - 1][srcY]->getPieceColor() == NULL_PIECE)//checking if there is a place to move to.
+					{
+						return VALID_MOVE;
+					}
+					else
+					{
+						return INVALID_MOVE_TOOL_MOVE_NOT_RIGHT;
+					}
 				}
 				else
 				{
