@@ -5,6 +5,7 @@
 #include "Bishop.h"
 #include "Knight.h"
 #include "Queen.h"
+#include "Pawn.h"
 #include <string>
 
 Board::Board(const std::string& board)
@@ -42,6 +43,7 @@ Board::Board(const std::string& board)
 				this->_board[q][m] = new Rook(Point(q, m), BLACK_PLAYER_BOARD, ROOK_BLACK);
 				break;
 			case PAWN_BLACK:
+				this->_board[q][m] = new Pawn(Point(q, m), BLACK_PLAYER_BOARD, PAWN_BLACK);
 				break;
 			case KNIGHT_BLACK:
 				this->_board[q][m] = new Knight(Point(q, m), BLACK_PLAYER_BOARD, KNIGHT_BLACK);
@@ -59,6 +61,7 @@ Board::Board(const std::string& board)
 				this->_board[q][m] = new Rook(Point(q, m), WHITE_PLAYER_BOARD, ROOK_WHITE);
 				break;
 			case PAWN_WHITE:
+				this->_board[q][m] = new Pawn(Point(q, m), WHITE_PLAYER_BOARD, PAWN_WHITE);
 				break;
 			case KNIGHT_WHITE:
 				this->_board[q][m] = new Knight(Point(q, m), WHITE_PLAYER_BOARD, KNIGHT_WHITE);
