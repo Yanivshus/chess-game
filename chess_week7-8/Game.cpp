@@ -143,7 +143,7 @@ void Game::movePiece(const Point& src, const Point& dst)
 	delete this->_pieceBefore;
 	this->_pieceBefore = new NullPiece(Point(src.getX(), src.getY()), TYPE_NULL, TYPE_NULL);//creting the null piece for the before spot.
 
-
+	//swapping the pieces
 	swap(&board[dst.getX()][dst.getY()], &this->_pieceBefore);
 
 	//for debugging
@@ -160,14 +160,14 @@ void Game::undoMove(const Point& src, const Point& dst)
 {
 	Piece*** board = this->_board->getBoard();
 
-	swap(&board[src.getX()][src.getY()], &board[dst.getX()][dst.getY()]);
+	swap(&board[src.getX()][src.getY()], &board[dst.getX()][dst.getY()]);//swapping the places of the dst and the src.
 
 	std::cout << board[dst.getX()][dst.getY()]->getPieceType() << std::endl;//for debugging.
 	std::cout << board[src.getX()][src.getY()]->getPieceType() << std::endl;
 
-	swap(&board[dst.getX()][dst.getY()], &this->_pieceBefore);//the error is here in the swap.
+	swap(&board[dst.getX()][dst.getY()], &this->_pieceBefore);//replacing with piece before.
 
-	//for some reason a player is dissapereanig.
+	
 	std::cout << board[dst.getX()][dst.getY()]->getPieceType() << std::endl;//for debugging.
 	std::cout << board[src.getX()][src.getY()]->getPieceType() << std::endl;
 
