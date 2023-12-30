@@ -1,4 +1,5 @@
 #include "Game.h"
+#include "Queen.h"
 
 Game::Game()
 {
@@ -56,6 +57,20 @@ std::string Game::turn(const std::string& playerMove)
 			{
 				code = INVALID_MOVE_CHESS_ON_CURRENT;
 				undoMove(src, dst);
+			}
+			else 
+			{
+				//checking if the piece is pawn, its color, and if in last row.
+				if (this->_board->getPiece(dst)->getPieceType() == PAWN_WHITE &&
+					this->_board->getPiece(dst)->getPieceLoc().getX() == ROWS - 1)
+				{
+					promotePawn(dst);
+				}
+				else if (this->_board->getPiece(dst)->getPieceType() == PAWN_BLACK &&
+					this->_board->getPiece(dst)->getPieceLoc().getX() == ROW_SPOT)
+				{
+					promotePawn(dst);
+				}
 			}
 		}
 
@@ -249,9 +264,28 @@ int Game::checkForChessOnOp(Board* board, Piece* toCheck)
 	}	
 }
 
+
+
 void Game::swap(Piece** src, Piece** dst)
 {
 	Piece* tmp = *src;
 	*src = *dst;
 	*dst = tmp;
+}
+
+void Game::promotePawn(Point pawnToPromote)
+{
+	Piece*** board = this->_board->getBoard();
+	Piece* newQueen = nullptr;
+	//checking the color fo the pawn
+	//creating queen from the same color.
+	if (board[pawnToPromote.getX()][pawnToPromote.getY()]->getPieceColor() == WHITE_PLAYER)
+	{
+		newQueen = new Queen(Point(pawnToPromote.getX(), pawnToPromote.getY()), WHITE_PLAYER, QUEEN_WHITE);
+	}
+	else{
+		newQueen = new Queen(Point(pawnToPromote.getX(), pawnToPromote.getY()), BLACK_PLAYER, QUEEN_BLACK);
+	}
+	swap(&board[pawnToPromote.getX()][pawnToPromote.getY()], &newQueen);//switching the pawn to the queen.
+	delete newQueen;//deleteing the pawn that was before.
 }
