@@ -25,6 +25,7 @@
 #define INVALID_MOVE_OUT_OF_INDEX 5
 #define INVALID_MOVE_TOOL_MOVE_NOT_RIGHT 6
 #define INVALID_MOVE_SAME_SRC_DST 7
+#define VALID_MOV_MATE 8
 
 #define SIZE_OF_MOVE 4
 
@@ -102,5 +103,10 @@ public:
 	/// <param name="src:">src pointer</param>
 	/// <param name="dst:">dst pointer</param>
 	void swap(Piece** src, Piece** dst);
-	
+
+	/// <summary>
+	/// promoting a pawn to queen.
+	/// </summary>
+	/// <param name="pawnToPromote:">pawn location to promote.</param>
+	void promotePawn(Point pawnToPromote);
 };
