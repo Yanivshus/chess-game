@@ -1,0 +1,1 @@
+in the old uml there were a few violations, a lot of repetetive and meeanigles function who can be summed up to one function. SRP and DRY.
