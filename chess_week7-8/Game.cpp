@@ -40,7 +40,7 @@ std::string Game::turn(const std::string& playerMove)
 		Piece* srcPiece = this->_board->getPiece(src);
 		code = srcPiece->checkIfMoveValid(this->_board, dst);
 		if (code == VALID_MOVE) 
-		{
+		{   // cr from here
 			movePiece(src, dst);
 			Piece* newPlacePiece = this->_board->getPiece(dst);
 			//checking if the piece after i moved it and checked if it moved right , made chess on the op king.
@@ -72,6 +72,7 @@ std::string Game::turn(const std::string& playerMove)
 					promotePawn(dst);
 				}
 			}
+			// to here
 		}
 
 		//just for debugging
